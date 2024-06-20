@@ -29,7 +29,7 @@ class UserProvider extends ChangeNotifier {
     return currentPage;
   }
   void setMemberName(String i){
-    this.memberName=i;
+    memberName=i;
     notifyListeners();
   }
 
@@ -37,7 +37,7 @@ class UserProvider extends ChangeNotifier {
     return memberName;
   }
   void setImgStr(String i){
-    this.imgStr=i;
+    imgStr=i;
     notifyListeners();
   }
 
