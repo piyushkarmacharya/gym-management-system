@@ -87,9 +87,9 @@ flutter:
   fonts:
     - family: PlayFairDisplay
       fonts:
-        - asset: assets/fonts/PlayFairDisplay-Regular.ttf
+        - asset: assets/fonts/PlayfairDisplay-Regular.ttf
           weight: 400
-        - asset: assets/fonts/PlayFairDisplay-Bold.ttf
+        - asset: assets/fonts/PlayfairDisplay-Bold.ttf
           weight: 700
     - family: Poppins
       fonts:

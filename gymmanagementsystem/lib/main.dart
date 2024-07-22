@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:gymmanagementsystem/pages/home_page.dart";
 import "package:gymmanagementsystem/pages/login_page.dart";
 import "package:gymmanagementsystem/user_provider.dart";
 import "package:provider/provider.dart";
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          scaffoldBackgroundColor:const Color(0xFFECE9E9),
+          scaffoldBackgroundColor: const Color(0xFFECE9E9),
           textTheme: TextTheme(
               bodySmall: TextStyle(
             color: Colors.red[900],
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Poppins',
           useMaterial3: true,
         ),
-        home:  const LoginPage(),
+        home: const HomePage(),
       ),
     );
   }

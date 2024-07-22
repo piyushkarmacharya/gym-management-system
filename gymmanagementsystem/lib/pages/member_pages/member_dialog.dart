@@ -6,17 +6,15 @@ import 'package:http/http.dart' as http;
 
 class MemberDialog extends StatefulWidget {
   final List<String> keys;
-  final Map<String,dynamic> obj;
+  final Map<String, dynamic> obj;
 
-  const MemberDialog(
-      {super.key, required this.keys, required this.obj});
+  const MemberDialog({super.key, required this.keys, required this.obj});
 
   @override
   State<MemberDialog> createState() => _MemberDialogState();
 }
 
 class _MemberDialogState extends State<MemberDialog> {
-  
   Future<void> delete(int mid) async {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
@@ -24,30 +22,29 @@ class _MemberDialogState extends State<MemberDialog> {
       Uri.parse("http://127.0.0.1:8000/api/Member/delete/$mid"),
     );
     if (response.statusCode == 200) {
-      
       Navigator.of(context).pop();
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(20),
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(20))),
-            backgroundColor: Colors.green,
-            margin: EdgeInsets.fromLTRB(
-                0, 0, 0.7 * screenWidth, 0.05 * screenHeight),
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 2),
-            content: Center(child: Text(jsonDecode(response.body)['message'])),
-          ),
-        );
+        SnackBar(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(20),
+                  topLeft: Radius.circular(0),
+                  topRight: Radius.circular(20))),
+          backgroundColor: Colors.green,
+          margin:
+              EdgeInsets.fromLTRB(0, 0, 0.7 * screenWidth, 0.05 * screenHeight),
+          behavior: SnackBarBehavior.floating,
+          duration: const Duration(seconds: 2),
+          content: Center(child: Text(jsonDecode(response.body)['message'])),
+        ),
+      );
 
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return const  HomePage();
+            return const HomePage();
           },
         ),
       );
@@ -61,7 +58,7 @@ class _MemberDialogState extends State<MemberDialog> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 500,
-      width:700,
+      width: 700,
       child: Dialog(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -91,11 +88,16 @@ class _MemberDialogState extends State<MemberDialog> {
                                 height: 200,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(40)),
-                                child: Image.memory(base64Decode(widget
-                                    .obj[widget.keys[index]]
-                                    .toString())))
-                            : Row(children: [Text(
-                                "${widget.keys[index][0].toUpperCase()}${widget.keys[index].substring(1)} : "),Text(" ${widget.obj[widget.keys[index]]==null?'(not given)':widget.obj[widget.keys[index]].toString()}"),],),
+                                child: Image.memory(base64Decode(
+                                    widget.obj[widget.keys[index]].toString())))
+                            : Row(
+                                children: [
+                                  Text(
+                                      "${widget.keys[index][0].toUpperCase()}${widget.keys[index].substring(1)} : "),
+                                  Text(
+                                      " ${widget.obj[widget.keys[index]] == null ? '(not given)' : widget.obj[widget.keys[index]].toString()}"),
+                                ],
+                              ),
                       ),
                     ),
                   ),
@@ -104,28 +106,27 @@ class _MemberDialogState extends State<MemberDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-      
                   //for editttt
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                       showDialog(
-                        barrierDismissible: false,
+                          barrierDismissible: false,
                           context: context,
                           builder: (context) {
                             return Dialog(
-                              child:MemberUpdate(keys: widget.keys, obj: widget.obj),
+                              child: MemberUpdate(
+                                  keys: widget.keys, obj: widget.obj),
                             );
                           });
                     },
                     style: const ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.lightBlueAccent),
+                      backgroundColor: MaterialStatePropertyAll<Color>(
+                          Colors.lightBlueAccent),
                     ),
                     child: const Text("Edit"),
                   ),
-      
-      
+
                   //for deletee
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
@@ -141,26 +142,26 @@ class _MemberDialogState extends State<MemberDialog> {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                   const  Text("Are you sure ?"),
+                                    const Text("Are you sure ?"),
                                     Padding(
                                       padding:
                                           const EdgeInsets.fromLTRB(8, 8, 8, 0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: ElevatedButton(
                                               onPressed: () {
                                                 Navigator.of(context).pop();
-      
+
                                                 delete(
                                                   widget.obj['mid'],
                                                 );
                                               },
-                                              
-                                              style:const ButtonStyle(
+                                              style: const ButtonStyle(
                                                 backgroundColor:
                                                     MaterialStatePropertyAll<
                                                         Color>(Colors.red),
@@ -174,12 +175,13 @@ class _MemberDialogState extends State<MemberDialog> {
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
-                                              style:const  ButtonStyle(
+                                              style: const ButtonStyle(
                                                 backgroundColor:
                                                     MaterialStatePropertyAll<
-                                                        Color>(Colors.lightGreen),
+                                                            Color>(
+                                                        Colors.lightGreen),
                                               ),
-                                              child:const  Text("Cancel"),
+                                              child: const Text("Cancel"),
                                             ),
                                           ),
                                         ],
@@ -196,7 +198,7 @@ class _MemberDialogState extends State<MemberDialog> {
                         backgroundColor:
                             MaterialStatePropertyAll<Color>(Colors.red),
                       ),
-                      child:const  Text("Delete"),
+                      child: const Text("Delete"),
                     ),
                   ),
                 ],
